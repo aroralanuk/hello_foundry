@@ -8,16 +8,14 @@ import "../util/Math.sol";
 /// @title Voting with delegation.
 contract Ballot {
 
+    // library for dealing with floating point numbers
     using UQ112x112 for uint;
-    // This declares a new complex type which will
-    // be used for variables later.
-    // It will represent a single voter.
+    // represents a single voter.
     struct Voter {
         uint weight; // weight is accumulated by delegation
         bool voted;  // if true, that person already voted
         address delegate; // person delegated to
         uint vote;   // index of the voted proposal
-
     }
 
     // This is a type for a single proposal.
@@ -28,7 +26,7 @@ contract Ballot {
 
     address public chairperson;
     uint public numVoters;
-    uint public weightCasted;
+    uint public weightCasted;   // tracking votes casted so far
 
 
     // This declares a state variable that
@@ -38,6 +36,7 @@ contract Ballot {
     // A dynamically-sized array of `Proposal` structs.
     Proposal[] public proposals;
 
+    // event for when all the votes are cast, delegate or direct
     event EveryoneHasVoted(uint _totalVotes, bytes32 _winningProposal);
 
     /// Create a new ballot to choose one of `proposalNames`.

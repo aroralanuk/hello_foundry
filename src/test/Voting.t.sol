@@ -228,10 +228,6 @@ contract VotingTest is DSTest {
     }
 
     function testExpectEmit() public {
-
-
-
-
         testBallot.addVoter(address(4));
 
         // // 1->3 and 2->3 vs chair and 4
